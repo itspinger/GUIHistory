@@ -1,0 +1,5 @@
+name: root
+password:
+database: history
+host: localhost
+port: 3306

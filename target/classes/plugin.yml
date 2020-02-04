@@ -1,0 +1,7 @@
+main: net.pinger.history.History
+version: 1.0
+name: History
+
+commands:
+    history:
+      usage: /<command>
