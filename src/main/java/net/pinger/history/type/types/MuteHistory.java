@@ -9,8 +9,8 @@ import java.util.UUID;
 
 public class MuteHistory extends HistoryType {
 
-    public MuteHistory(History history, UUID id, String reason, long occurred, long expiring, String executor) {
-        super(history, id, reason, occurred, expiring, executor);
+    public MuteHistory(History history, UUID id, String reason, long occurred, long expiring, String executor, boolean active) {
+        super(history, id, reason, occurred, expiring, executor, active);
     }
 
     @Override

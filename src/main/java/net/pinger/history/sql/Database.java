@@ -36,7 +36,7 @@ public class Database {
 
     public static void close(PreparedStatement preparedStatement, ResultSet resultSet) {
         try {
-            // Necessary check
+            // Necessary check;
             if (preparedStatement != null) {
                 if (!preparedStatement.isClosed()) {
                     preparedStatement.close();

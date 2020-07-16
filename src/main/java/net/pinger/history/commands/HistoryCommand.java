@@ -17,6 +17,7 @@ public class HistoryCommand implements CommandExecutor {
         this.history = history;
     }
 
+    @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
         if (!(commandSender instanceof Player)) {
             commandSender.sendMessage(ChatColor.RED + "Only players can use this command.");

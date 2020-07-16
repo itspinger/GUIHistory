@@ -9,8 +9,8 @@ import java.util.UUID;
 
 public class KickHistory extends HistoryType {
 
-    public KickHistory(History history, UUID id, String reason, long occurred, long expiring, String executor) {
-        super(history, id, reason, occurred, expiring, executor);
+    public KickHistory(History history, UUID id, String reason, long occurred, long expiring, String executor, boolean active) {
+        super(history, id, reason, occurred, expiring, executor, active);
     }
 
     @Override
