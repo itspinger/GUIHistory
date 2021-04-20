@@ -1,6 +1,7 @@
 package net.pinger.history.type;
 
 import net.pinger.history.History;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 
 import java.util.UUID;
@@ -12,7 +13,7 @@ public abstract class HistoryType {
     private final String reason;
     private final long occurred, expiring;
 
-    private boolean active = true;
+    private boolean active;
 
     private final String executor;
     private final UUID id;
@@ -44,6 +45,10 @@ public abstract class HistoryType {
 
     public String getExecutor() {
         return executor;
+    }
+
+    public String isActivePunishment() {
+        return active ? ChatColor.GREEN + "Yes" : ChatColor.RED + "No";
     }
 
     public boolean isActive() {

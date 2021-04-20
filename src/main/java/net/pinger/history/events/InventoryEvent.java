@@ -11,14 +11,16 @@ public class InventoryEvent implements Listener {
 
     @EventHandler
     public void onClick(InventoryClickEvent event) {
-        if (event.getClickedInventory() == null) return;
+        if (event.getClickedInventory() == null)
+            return;
 
         if (event.getClickedInventory().getTitle().endsWith("History")) {
             event.setCancelled(true);
 
-            if (event.getCurrentItem().getType() == null || event.getCurrentItem().getType().equals(Material.AIR)) return;
+            if (event.getCurrentItem().getType() == null || event.getCurrentItem().getType().equals(Material.AIR))
+                return;
 
-            if (event.getCurrentItem().getType().equals(Material.NETHER_STAR)) {
+            if (event.getCurrentItem().getType() == Material.NETHER_STAR) {
                 OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(event.getCurrentItem().getItemMeta().getDisplayName().split("\\s++")[1]);
                 event.getWhoClicked().closeInventory();
                 Bukkit.dispatchCommand(event.getWhoClicked(), "punish " + offlinePlayer.getName());

@@ -28,8 +28,8 @@ public class HistoryUser {
 
     // TO DO
     public void loadHistory() {
-        if (!historyTypes.isEmpty()) historyTypes.clear();
-        Connection connection = history.database().getConnection();
+        if (!this.historyTypes.isEmpty()) this.historyTypes.clear();
+        Connection connection = history.getDatabaseServer().getConnection();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM litebans_bans WHERE `uuid` = ?;");
             preparedStatement.setString(1, this.id.toString());

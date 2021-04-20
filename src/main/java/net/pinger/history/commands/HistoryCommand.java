@@ -42,7 +42,7 @@ public class HistoryCommand implements CommandExecutor {
             return true;
         }
 
-        player.openInventory(history.getPlayerHistory(offlinePlayer.getUniqueId()));
+        player.openInventory(this.history.getPlayerHistory(offlinePlayer.getUniqueId()));
         return true;
     }
 }
