@@ -2,13 +2,16 @@ package net.pinger.history.inventory.providers;
 
 import net.pinger.history.History;
 import net.pinger.history.item.ItemBuilder;
+import net.pinger.history.item.XMaterial;
 import net.pinger.history.type.HistoryType;
 import net.pinger.history.user.HistoryUser;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.intelligent.inventories.contents.InventoryContents;
+import org.intelligent.inventories.item.IntelligentItem;
 import org.intelligent.inventories.provider.IntelligentProvider;
 
 import java.text.DateFormat;
@@ -27,6 +30,15 @@ public class HistoryProvider implements IntelligentProvider {
     @Override
     public void initialize(Player player, InventoryContents contents) {
         // Get the user object from the uuid of this player
+
+        // Add punish item
+        ItemStack punish = new ItemBuilder(XMaterial.NETHER_STAR)
+                .name(ChatColor.RED + "Punish " + player.getName())
+                .build();
+
+        contents.setItem(5, 4, IntelligentItem.createNew(punish, e -> {
+            Bukkit.dispatchCommand(e.getWhoClicked(), "punish " + player.getName());
+        }));
     }
 
     private ItemStack getHistoryType(HistoryUser user, HistoryType type) {
