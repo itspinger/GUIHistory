@@ -1,7 +1,6 @@
 package net.pinger.history;
 
 import net.pinger.history.commands.HistoryCommand;
-import net.pinger.history.events.InventoryEvent;
 import net.pinger.history.item.ItemBuilder;
 import net.pinger.history.sql.Database;
 import net.pinger.history.type.HistoryType;
@@ -34,10 +33,11 @@ public class History extends JavaPlugin {
                 getConfig().getString("host"),
                 getConfig().getInt("port"));
 
+        this.addDefaultConfig();
+
         this.database.createConnection();
         this.historyUserManager = new HistoryUserManager(this);
 
-        Bukkit.getPluginManager().registerEvents(new InventoryEvent(), this);
         getCommand("history").setExecutor(new HistoryCommand(this));
     }
 

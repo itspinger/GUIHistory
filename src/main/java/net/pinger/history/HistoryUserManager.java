@@ -20,7 +20,7 @@ public class HistoryUserManager {
 
         if (user == null) {
             // Put the new user
-            this.users.put(id, (user = new HistoryUser(id, history)));
+            this.users.put(id, (user = new HistoryUser(id, this.history)));
         }
 
         // Return the user
