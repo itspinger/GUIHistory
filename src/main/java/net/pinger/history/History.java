@@ -23,6 +23,7 @@ import java.util.UUID;
 public class History extends JavaPlugin {
 
     private Database database;
+    private HistoryUserManager historyUserManager;
     private final Map<UUID, HistoryUser> historyUsers = new HashMap<>();
 
     @Override
@@ -34,6 +35,8 @@ public class History extends JavaPlugin {
                 getConfig().getInt("port"));
 
         this.database.createConnection();
+        this.historyUserManager = new HistoryUserManager(this);
+
         Bukkit.getPluginManager().registerEvents(new InventoryEvent(), this);
         getCommand("history").setExecutor(new HistoryCommand(this));
     }
@@ -92,5 +95,9 @@ public class History extends JavaPlugin {
 
     public Database getDatabaseServer() {
         return this.database;
+    }
+
+    public HistoryUserManager getHistoryUserManager() {
+        return historyUserManager;
     }
 }

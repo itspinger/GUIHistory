@@ -4,19 +4,15 @@ import net.pinger.history.History;
 import net.pinger.history.item.ItemBuilder;
 import net.pinger.history.type.HistoryType;
 import net.pinger.history.user.HistoryUser;
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.intelligent.inventories.contents.InventoryContents;
 import org.intelligent.inventories.provider.IntelligentProvider;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.UUID;
 
 public class HistoryProvider implements IntelligentProvider {
 
@@ -31,7 +27,6 @@ public class HistoryProvider implements IntelligentProvider {
     @Override
     public void initialize(Player player, InventoryContents contents) {
         // Get the user object from the uuid of this player
-
     }
 
     private ItemStack getHistoryType(HistoryUser user, HistoryType type) {
