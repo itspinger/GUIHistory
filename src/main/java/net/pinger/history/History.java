@@ -2,16 +2,16 @@ package net.pinger.history;
 
 import net.pinger.history.commands.HistoryCommand;
 import net.pinger.history.events.InventoryEvent;
+import net.pinger.history.item.ItemBuilder;
 import net.pinger.history.sql.Database;
 import net.pinger.history.type.HistoryType;
 import net.pinger.history.user.HistoryUser;
-import net.pinger.item.ItemBuilder;
-import net.pinger.plugin.BukkitPlugin;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.plugin.java.JavaPlugin;
 
 import java.sql.SQLException;
 import java.text.DateFormat;
@@ -20,10 +20,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-public class History extends BukkitPlugin {
+public class History extends JavaPlugin {
 
     private Database database;
-    private Map<UUID, HistoryUser> historyUsers = new HashMap<>();
+    private final Map<UUID, HistoryUser> historyUsers = new HashMap<>();
 
     @Override
     public void onEnable() {
@@ -47,7 +47,6 @@ public class History extends BukkitPlugin {
         }
     }
 
-    @Override
     public void addDefaultConfig() {
         getConfig().options().copyDefaults(true);
         getConfig().addDefault("host", "localhost");
@@ -58,11 +57,6 @@ public class History extends BukkitPlugin {
 
         saveConfig();
         saveDefaultConfig();
-    }
-
-    @Override
-    public void loadModules() {
-        //
     }
 
     public Inventory getPlayerHistory(UUID id) {
@@ -83,16 +77,16 @@ public class History extends BukkitPlugin {
             DateFormat df = new SimpleDateFormat("yyyy - MM - dd");
             DateFormat sec = new SimpleDateFormat("yyyy - MM - dd HH:mm::ss");
 
-            builder.setLore(" - " + ChatColor.GOLD + "Type: " + type.name(),
+            builder.lore(" - " + ChatColor.GOLD + "Type: " + type.name(),
                             " - " + ChatColor.GOLD + "Active: " + type.isActivePunishment(),
                             " - " + ChatColor.GOLD + "Reason: " + type.getReason(),
                             " - " + ChatColor.GOLD + "Occurred: " + df.format(type.getOccurred()),
                             " - " + ChatColor.GOLD + "Expiring: " + sec.format(type.getExpiring()),
                             " - " + ChatColor.GOLD + "Issued by: " + type.getExecutor());
-            inventory.setItem(i, builder.toItemStack());
+            inventory.setItem(i, builder.build());
         }
 
-        inventory.setItem(53, new ItemBuilder(Material.NETHER_STAR).setName(ChatColor.RED + "Punish " + off.getName()).toItemStack());
+        inventory.setItem(53, new ItemBuilder(Material.NETHER_STAR).name(ChatColor.RED + "Punish " + off.getName()).build());
         return inventory;
     }
 
