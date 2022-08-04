@@ -11,6 +11,8 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.intelligent.inventories.contents.InventoryContents;
+import org.intelligent.inventories.contents.InventoryPagination;
+import org.intelligent.inventories.contents.IteratorType;
 import org.intelligent.inventories.item.IntelligentItem;
 import org.intelligent.inventories.provider.IntelligentProvider;
 
@@ -30,6 +32,29 @@ public class HistoryProvider implements IntelligentProvider {
     @Override
     public void initialize(Player player, InventoryContents contents) {
         // Get the user object from the uuid of this player
+        HistoryUser user = this.history.getHistoryUserManager().getHistoryUser(player.getUniqueId());
+
+        // Get the pagination
+        InventoryPagination pagination = contents.getPagination();
+
+        // Load user history
+        user.loadHistory(list -> {
+            // Load the inventory here
+            IntelligentItem[] items = new IntelligentItem[list.size()];
+
+            for (int i = 0; i < items.length; i++) {
+                // Get the type
+                HistoryType type = list.get(i);
+
+                // Add to the items
+                items[i++] = IntelligentItem.createNew(getHistoryType(type));
+            }
+
+            // Add to pagination
+            pagination.setItems(items);
+            pagination.setItemsPerPage(36);
+            pagination.addToIterator(contents.newIterator(IteratorType.HORIZONTAL, 0, 0));
+        });
 
         // Add punish item
         ItemStack punish = new ItemBuilder(XMaterial.NETHER_STAR)
@@ -41,7 +66,7 @@ public class HistoryProvider implements IntelligentProvider {
         }));
     }
 
-    private ItemStack getHistoryType(HistoryUser user, HistoryType type) {
+    private ItemStack getHistoryType(HistoryType type) {
         ItemBuilder builder = new ItemBuilder(type.material());
 
         // Set name
