@@ -2,3 +2,5 @@
 An open-source addon for LiteBans
 
 ## Installation
+
+## License
